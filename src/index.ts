@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   res.send('Digital Bratt System Backend is running securely! 🚀<br>API endpoints are available at /api/v1');
 });
 
-import { seedDev } from './controllers/authController';
+
 
 const connectDB = async () => {
   try {
@@ -37,7 +37,7 @@ const connectDB = async () => {
     
     await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB Replica Set (Ready for ACID Transactions)');
-    await seedDev(); // Seed default developer if missing
+
   } catch (error) {
     console.error('❌ MongoDB Connection Error:', error);
     process.exit(1);

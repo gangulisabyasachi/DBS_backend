@@ -10,6 +10,7 @@ export interface ITransaction extends Document {
   status: 'Approved' | 'Denied' | 'Pending' | 'Synced' | 'Rejected';
   source: 'Online' | 'Offline';
   timestamp: Date;
+  location?: { lat: number; lng: number };
 }
 
 const TransactionSchema: Schema = new Schema({
@@ -22,6 +23,10 @@ const TransactionSchema: Schema = new Schema({
   status: { type: String, enum: ['Approved', 'Denied', 'Pending', 'Synced', 'Rejected'], required: true },
   source: { type: String, enum: ['Online', 'Offline'], required: true },
   timestamp: { type: Date, required: true },
+  location: {
+    lat: { type: Number },
+    lng: { type: Number }
+  }
 }, { timestamps: true });
 
 TransactionSchema.index({ timestamp: -1 });

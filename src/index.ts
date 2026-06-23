@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import apiRoutes from './routes/api';
+import { startQuotaEngine } from './jobs/quotaEngine';
 
 dotenv.config();
 
@@ -34,9 +35,10 @@ const connectDB = async () => {
       console.warn("MONGO_URI is missing. Server running without DB connection. Add it to .env once generated.");
       return;
     }
-    
+
     await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB Replica Set (Ready for ACID Transactions)');
+    startQuotaEngine();
 
   } catch (error) {
     console.error('❌ MongoDB Connection Error:', error);
